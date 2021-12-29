@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+   
+    <!-- <link rel="stylesheet" href="./dist/css/style.css"> -->
+
+
+<style>
+
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap");
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #e9e9e9;
+  font-family: 'Fira Mono', monospace;
+  font-size: 20px;
+}
+
+body {
+  height: 100vh;
+  width: 100wh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.hello {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  font-style: italic;
+}
+
+main {
+  -webkit-box-shadow: -6px -6px 9px #fff, 6px 6px 9px rgba(0, 0, 0, 0.4);
+          box-shadow: -6px -6px 9px #fff, 6px 6px 9px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  border-radius: 30px;
+}
+
+main input, main button {
+  outline: none;
+}
+
+main input::-webkit-outer-spin-button,
+main input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+main input[type=number] {
+  -moz-appearance: textfield;
+}
+
+main input {
+  -webkit-box-shadow: inset -6px -6px 9px #fff, inset 6px 6px 9px rgba(0, 0, 0, 0.4);
+          box-shadow: inset -6px -6px 9px #fff, inset 6px 6px 9px rgba(0, 0, 0, 0.4);
+  width: 320px;
+  height: 60px;
+  padding: 16px 32px;
+  border: none;
+  text-align: right;
+  border: none;
+  border-radius: 30px;
+  text-shadow: -1px -1px 2px #fff, 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+main .keys {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.8rem;
+  margin-top: 20px;
+}
+
+main button {
+  -webkit-box-shadow: -6px -6px 9px #fff, 6px 6px 9px rgba(0, 0, 0, 0.4);
+          box-shadow: -6px -6px 9px #fff, 6px 6px 9px rgba(0, 0, 0, 0.4);
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: #e9e9e9;
+}
+
+main button:hover, main button:active {
+  background-color: #ccc;
+}
+
+main button:active {
+  -webkit-box-shadow: inset -6px -6px 9px #fff, inset 6px 6px 9px rgba(0, 0, 0, 0.4);
+          box-shadow: inset -6px -6px 9px #fff, inset 6px 6px 9px rgba(0, 0, 0, 0.4);
+}
+
+main .op__key,
+main eq__key {
+  color: #ff652f;
+}
+/*# sourceMappingURL=style.css.map */
+</style>
+
+
+
+
+
+
+
+
+
+   
+</head>
+<body>
+    <main>
+    <div class="hello" > <u> CALCULATOR</u> <img src="https://img.icons8.com/metro/20/000000/mac-os.png" /></div>
+        <input type='number' value= '0'>
+        <div class='keys'>
+            <button class='op__key' op='clear'>C</button>
+            <button class='op__key' op='negate'>+/-</button>
+            <button class='op__key' op='percent'>%</button>
+            <button class='op__key' op="divide">/</button>
+            <button class='num_key'>7</button>
+            <button class='num_key'>8</button>
+            <button class='num_key'>9</button>
+            <button class='op__key' op='multiply'>x</button>
+            <button class='num_key'>4</button>
+            <button class='num_key'>5</button>
+            <button class="num_key">6</button>
+            <button class='op__key'  op='subtract'>-</button>
+            <button class='num_key'>1</button>
+            <button class='num_key'>2</button>
+            <button class='num_key'>3</button>
+            <button class='op__key'  op='add'>+</button>
+            <span></span>
+            <button class='num_key'>0</button>
+            <button class='num_key'>.</button>
+            <button class="eq__key">=</button>
+        </div>
+    </main>
+    <script>
+        var bgcolor=new Array("#029FD4", "#D43702", "#1EFF00", "#EAEAFF", "#FFEA00", "#AB5252", "#DE28D8")
+
+document.body.style.background=bgcolor[Math.floor(Math.random()*bgcolor.length)]
+
+    </script>
+<!-- <script src="./Javascript/main.js"></script> -->
+
+
+<script>
+
+
+    
+const $input = document.querySelector("input");
+
+document.querySelectorAll(".num_key").forEach(
+  el => {
+    el.onclick = () => $input.value = $input.value !== "0" ? $input.value + el.innerText : el.innerText;
+  });
+
+// creating an array to contain the value of pressed buttons
+const buffer = []
+
+const opCallback = opName => () => {
+    let currentVal = parseFloat($input.value);
+    if (opName === "percent") {
+      currentVal *= 0.01;
+      $input.value = currentVal;
+    }
+    else {
+      if (buffer && buffer.length) {
+        buffer.push({ value: currentVal });
+
+        const result = evaluate(buffer);
+
+        buffer.push({ value: result });
+        buffer.push({ value: opName });
+
+        $input.value = "";
+      }
+      else {
+        buffer.push({ value: currentVal });
+        buffer.push({ value: opName });
+        $input.value = "";
+      }
+    }
+  }
+
+const evaluate = buffer => {
+  const secondOperand = buffer.pop().value;
+  const operator = buffer.pop().value;
+  const firstOperand = buffer.pop().value;
+
+  switch (operator) {
+    case "add":
+      return firstOperand + secondOperand;
+      break;
+    case "subtract":
+      return firstOperand - secondOperand;
+      break;
+    case "multiply":
+      return firstOperand * secondOperand;
+      break;
+    case "divide":
+      return firstOperand / secondOperand;
+      break;
+    default:
+      return secondOperand;
+  }
+}
+
+for (const opName of [ "add", "subtract", "multiply", "divide", "percent" ]) {
+  document.querySelector(`.op__key[op=${opName}]`).onclick =
+    opCallback(opName);
+}
+
+document.querySelector(".eq__key").onclick =
+  () => {
+    if (buffer && buffer.length) {
+      buffer.push({ value: parseFloat($input.value) });
+      $input.value = evaluate(buffer);
+    }
+  }
+
+document.querySelector(".op__key[op=clear]").onclick =
+  () => {
+    $input.value = 0;
+    buffer.length = 0;
+  }
+
+document.querySelector(".op__key[op=negate]").onclick =
+  () => $input.value = -parseFloat($input.value);
+
+  
+s
+</script>
+
+
+
+</body>
+</html>
